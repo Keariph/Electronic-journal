@@ -6,9 +6,10 @@ import com.mongodb.client.*;
 import org.bson.Document;
 
 public class DBConfig {
-    public String connect(){
-        MongoClient client = MongoClients.create();
-        MongoDatabase database = client.getDatabase("ElectronicJournal");
-        return "hello";
+    MongoClient client;
+    MongoDatabase database;
+    DBConfig(){
+        client = MongoClients.create();
+        database = client.getDatabase("ElectronicJournal");
     }
 }
