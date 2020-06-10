@@ -3,8 +3,10 @@ package ru.aryhlinskaya.Diplom;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.aryhlinskaya.Diplom.config.DBConfig;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 public class Visit implements ActionWithDB<Visit>{
     Integer id;
@@ -71,16 +73,30 @@ public class Visit implements ActionWithDB<Visit>{
 
     @Override
     public void update() {
-
+        String query = "update set UPDATE public.\"" + this.getClass().getName() +
+                "\"SET id=%d, student_id=%d, visit=%d, date=%s" +
+                "WHERE id = %d;";
+        query = String.format(query, id, student, visit, date, id);
+        dbConfig.update(query);
     }
 
     @Override
     public void delete() {
-
+        String query = "delete from public.\"" + this.getClass().getName() +"\" where id = " + getId();
+        dbConfig.delete(query);
     }
 
     @Override
     public List<Visit> read(String query) {
-        return null;
+        ArrayList<Visit> visits = new ArrayList<Visit>();
+        List<Map<String, Object>> resultList = dbConfig.query(query);
+        for(Integer i=0;i<resultList.size();i++){
+            Integer id = (Integer) resultList.get(i).get("id");
+            Integer student = (Integer) resultList.get(i).get("student_id");
+            Boolean visit = (Boolean) resultList.get(i).get("visit");
+            Date date = (Date) resultList.get(i).get("date");
+            visits.add((new Visit(id, student, visit, date)));
+        }
+        return visits;
     }
 }

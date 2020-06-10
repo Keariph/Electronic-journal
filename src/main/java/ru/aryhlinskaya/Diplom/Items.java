@@ -1,9 +1,13 @@
 package ru.aryhlinskaya.Diplom;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import ru.aryhlinskaya.Diplom.config.DBConfig;
+
 public class Items {
     Integer id;
     String name;
-
+    @Autowired
+    DBConfig dbConfig;
     public Items() {
     }
 

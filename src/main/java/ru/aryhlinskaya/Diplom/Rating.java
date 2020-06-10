@@ -1,14 +1,20 @@
 package ru.aryhlinskaya.Diplom;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import ru.aryhlinskaya.Diplom.config.DBConfig;
+
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 public class Rating implements ActionWithDB<Rating>{
     Integer id;
     Integer student;
     Integer rating;
     Date date;
-
+    @Autowired
+    DBConfig dbConfig;
     public Rating() {
     }
 
@@ -58,21 +64,39 @@ public class Rating implements ActionWithDB<Rating>{
 
     @Override
     public void create() {
-
+        String query = "insert into public.\"" + this.getClass().getName() +
+                "\" (id, student, rating, date) " + "(%d, %s, %d, %s)";
+        query = String.format(query, id, student, rating, date);
+        System.out.println(query);
+        dbConfig.update(query);
     }
 
     @Override
     public void update() {
-
+        String query = "update set UPDATE public.\"" + this.getClass().getName() +
+                "\"SET id=%d, student_id=%d, rating=%d, date=%s" +
+                "WHERE id = %d;";
+        query = String.format(query, id, student, rating, date, id);
+        dbConfig.update(query);
     }
 
     @Override
     public void delete() {
-
+        String query = "delete from public.\"" + this.getClass().getName() +"\" where id = " + getId();
+        dbConfig.delete(query);
     }
 
     @Override
     public List<Rating> read(String query) {
-        return null;
+        ArrayList<Rating> ratings = new ArrayList<Rating>();
+        List<Map<String, Object>> resultList = dbConfig.query(query);
+        for(Integer i=0;i<resultList.size();i++){
+            Integer id = (Integer) resultList.get(i).get("id");
+            Integer student = (Integer) resultList.get(i).get("student_id");
+            Integer rating = (Integer) resultList.get(i).get("visit");
+            Date date = (Date) resultList.get(i).get("date");
+            ratings.add((new Rating(id, student, rating, date)));
+        }
+        return ratings;
     }
 }
