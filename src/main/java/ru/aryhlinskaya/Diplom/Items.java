@@ -1,13 +1,13 @@
 package ru.aryhlinskaya.Diplom;
 
-public class Object {
+public class Items {
     Integer id;
     String name;
 
-    public Object() {
+    public Items() {
     }
 
-    public Object(Integer id, String name) {
+    public Items(Integer id, String name) {
         this.id = id;
         this.name = name;
     }

@@ -1,8 +1,9 @@
 package ru.aryhlinskaya.Diplom;
 
 import java.util.Date;
+import java.util.List;
 
-public class Rating {
+public class Rating implements ActionWithDB<Rating>{
     Integer id;
     Integer student;
     Integer rating;
@@ -53,5 +54,25 @@ public class Rating {
     public String toString(){
         return "{\"id\":" + getId() +", \"student\":" + getStudent() +
                 ", \"rating\":" + getRating() + ", \"date\":\'" + getDate() + "\'}";
+    }
+
+    @Override
+    public void create() {
+
+    }
+
+    @Override
+    public void update() {
+
+    }
+
+    @Override
+    public void delete() {
+
+    }
+
+    @Override
+    public List<Rating> read(String query) {
+        return null;
     }
 }

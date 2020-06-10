@@ -1,8 +1,9 @@
 package ru.aryhlinskaya.Diplom;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class Group {
+public class Group implements ActionWithDB<Group>{
     int id;
     String name;
     ArrayList<Integer> students;
@@ -55,5 +56,25 @@ public class Group {
     {
         return "{\"id\":" + getId() + ", \"name\":\"" + getName() +
                 "\", \"students\":" + getStudents() + ", \"objects\":" + getObjects() + "}";
+    }
+
+    @Override
+    public void create() {
+
+    }
+
+    @Override
+    public void update() {
+
+    }
+
+    @Override
+    public void delete() {
+
+    }
+
+    @Override
+    public List<Group> read(String query) {
+        return null;
     }
 }

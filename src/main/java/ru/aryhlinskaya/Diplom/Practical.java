@@ -1,8 +1,9 @@
 package ru.aryhlinskaya.Diplom;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class Practical extends Object {
+public class Practical extends Items implements ActionWithDB<Practical>{
     Integer teacher;
     ArrayList<Rating> ratings;
     ArrayList<Visit> visits;
@@ -50,5 +51,25 @@ public class Practical extends Object {
                 ", id=" + id +
                 ", name='" + name + '\'' +
                 '}';
+    }
+
+    @Override
+    public void create() {
+
+    }
+
+    @Override
+    public void update() {
+
+    }
+
+    @Override
+    public void delete() {
+
+    }
+
+    @Override
+    public List<Practical> read(String query) {
+        return null;
     }
 }

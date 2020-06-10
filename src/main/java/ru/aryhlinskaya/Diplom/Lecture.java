@@ -1,16 +1,17 @@
 package ru.aryhlinskaya.Diplom;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class Lecture extends Object{
+public class Lecture extends Items implements ActionWithDB<Lecture>{
     Integer teacher;
-    ArrayList<Rating> ratings;
-    ArrayList<Visit> visits;
+    ArrayList<Integer> ratings;
+    ArrayList<Integer> visits;
 
     public Lecture() {
     }
 
-    public Lecture(Integer id, String name, Integer teacher, ArrayList<Rating> ratings, ArrayList<Visit> visits) {
+    public Lecture(Integer id, String name, Integer teacher, ArrayList<Integer> ratings, ArrayList<Integer> visits) {
         super(id, name);
         this.teacher = teacher;
         this.ratings = ratings;
@@ -25,19 +26,19 @@ public class Lecture extends Object{
         this.teacher = teacher;
     }
 
-    public ArrayList<Rating> getRatings() {
+    public ArrayList<Integer> getRatings() {
         return ratings;
     }
 
-    public void setRatings(ArrayList<Rating> ratings) {
+    public void setRatings(ArrayList<Integer> ratings) {
         this.ratings = ratings;
     }
 
-    public ArrayList<Visit> getVisits() {
+    public ArrayList<Integer> getVisits() {
         return visits;
     }
 
-    public void setVisits(ArrayList<Visit> visits) {
+    public void setVisits(ArrayList<Integer> visits) {
         this.visits = visits;
     }
 
@@ -50,5 +51,25 @@ public class Lecture extends Object{
                 ", \"id\":" + id +
                 ", \"name\":\'" + name + '\'' +
                 '}';
+    }
+
+    @Override
+    public void create() {
+
+    }
+
+    @Override
+    public void update() {
+
+    }
+
+    @Override
+    public void delete() {
+
+    }
+
+    @Override
+    public List<Lecture> read(String query) {
+        return null;
     }
 }
