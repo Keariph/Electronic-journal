@@ -9,8 +9,8 @@ public class DBConfig {
     Connection connection;
     String url = "jdbc:postgresql://localhost:5432/Diplom";
     String login = "postgres";
-    String password = "admin";
-    DBConfig(){
+    String password = "qwert";
+    public DBConfig(){
         try {
             Class.forName("org.postgresql.Driver");
             connection = DriverManager.getConnection(url, login, password);

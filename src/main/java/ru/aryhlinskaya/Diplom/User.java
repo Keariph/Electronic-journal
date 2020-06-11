@@ -1,23 +1,16 @@
 package ru.aryhlinskaya.Diplom;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.MongoId;
 import ru.aryhlinskaya.Diplom.config.DBConfig;
 
-import java.util.ArrayDeque;
 
 
 public class User {
-    @Id
     Integer id;
     String name;
     String password;
     String email;
     String phone;
-    @Autowired
-    DBConfig dbConfig;
+    DBConfig dbConfig = new DBConfig();
     public User() {
     }
 

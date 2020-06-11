@@ -12,6 +12,9 @@ public class Student extends User implements ActionWithDB<Student>{
     Integer course;
     String faculty;
 
+    public Student() {
+    }
+
     public Student(Integer id, String name, String password, String email, String phone, Integer course, String faculty) {
         super(id, name, password, email, phone);
         this.course = course;
@@ -44,7 +47,7 @@ public class Student extends User implements ActionWithDB<Student>{
     public void create() {
         String query = "insert into public.\"" + Student.class.getName() +
                 "\" (id, name, password, email, phone, course, faculty) " +
-                "(%d, %s, %s, %s, %s, %d, %s)";
+                "(%d, \"%s\", \"%s\", \"%s\", \"%s\", %d, \"%s\")";
         query = String.format(query, id,name,password,email,phone, course, faculty);
         System.out.println(query);
         dbConfig.update(query);
