@@ -3,6 +3,8 @@ package ru.aryhlinskaya.Diplom;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.aryhlinskaya.Diplom.config.DBConfig;
 
+import java.util.ArrayList;
+
 public class Items {
     Integer id;
     String name;
@@ -30,5 +32,15 @@ public class Items {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    protected ArrayList<Integer> stringToArray(String list){
+        list = list.replace("{}", "");
+        ArrayList<Integer> arrayList = new ArrayList<Integer>();
+        String[] arrey = list.split(",");
+        for(int i = 0; i < arrey.length; i++){
+            arrayList.add(Integer.parseInt(arrey[i]));
+        }
+        return arrayList;
     }
 }

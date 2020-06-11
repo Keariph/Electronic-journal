@@ -108,8 +108,8 @@ public class Lecture extends Items implements ActionWithDB<Lecture>{
             Integer id = (Integer) resultList.get(i).get("id");
             String name = (String) resultList.get(i).get("name");
             Integer teacher = (Integer) resultList.get(i).get("teacher_id");
-            ArrayList<Integer> ratings = (ArrayList<Integer>) resultList.get(i).get("ratings");
-            ArrayList<Integer> visits = (ArrayList<Integer>) resultList.get(i).get("visits");
+            ArrayList<Integer> ratings = stringToArray((String) resultList.get(i).get("ratings"));
+            ArrayList<Integer> visits = stringToArray((String) resultList.get(i).get("visits"));
             lectures.add((new Lecture(id,name, teacher, ratings,visits)));
         }
         return lectures;

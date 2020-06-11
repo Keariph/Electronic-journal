@@ -116,10 +116,20 @@ public class Group implements ActionWithDB<Group>{
         for(Integer i=0;i<resultList.size();i++){
             Integer id = (Integer) resultList.get(i).get("id");
             String name = (String) resultList.get(i).get("name");
-            ArrayList<Integer> students = (ArrayList<Integer>) resultList.get(i).get("students");
-            ArrayList<Integer> items = (ArrayList<Integer>) resultList.get(i).get("items");
+            ArrayList<Integer> students = stringToArray((String) resultList.get(i).get("students"));
+            ArrayList<Integer> items = stringToArray((String) resultList.get(i).get("items"));
             groups.add((new Group(id,name, students, items)));
         }
         return groups;
+    }
+
+    private ArrayList<Integer> stringToArray(String list){
+        list = list.replace("{}", "");
+        ArrayList<Integer> arrayList = new ArrayList<Integer>();
+        String[] arrey = list.split(",");
+        for(int i = 0; i < arrey.length; i++){
+            arrayList.add(Integer.parseInt(arrey[i]));
+        }
+        return arrayList;
     }
 }

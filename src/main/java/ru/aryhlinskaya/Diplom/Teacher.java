@@ -6,15 +6,15 @@ import java.util.Map;
 
 public class Teacher extends User implements ActionWithDB<Teacher>{
     String department;
-    ArrayList<Integer> groups;
+    ArrayList<Integer> items;
     public Teacher(){
 
     }
 
-    public Teacher(Integer id, String name, String password, String email, String phone, String department, ArrayList<Integer> groups) {
+    public Teacher(Integer id, String name, String password, String email, String phone, String department, ArrayList<Integer> items) {
         super(id, name, password, email, phone);
         this.department = department;
-        this.groups = groups;
+        this.items = items;
     }
 
     public String getDepartment() {
@@ -25,30 +25,30 @@ public class Teacher extends User implements ActionWithDB<Teacher>{
         this.department = department;
     }
 
-    public ArrayList<Integer> getGroups() {
-        return groups;
+    public ArrayList<Integer> getItems() {
+        return items;
     }
 
-    public void setGroups(ArrayList<Integer> groups) {
-        this.groups = groups;
+    public void setItems(ArrayList<Integer> items) {
+        this.items = items;
     }
 
     public String toString(){
         return "{\"id\": " + getId() + " ,\"name\":\"" + getName() + "\" ,\"password\":\"" + getPassword() +
                 "\",\"email\":\"" + getEmail() + "\" ,\"phone\":\"" + getPhone() + "\" ,\"department\": \"" + getDepartment() +
-                "\",\"groups\":" + getGroups() +"}";
+                "\",\"groups\":" + getItems() +"}";
     }
 
     @Override
     public void create() {
         String query = "insert into public.\"" + this.getClass().getName() +
-                "\" (id, name, password, email, phone, department, groups) " +
+                "\" (id, name, password, email, phone, department, items) " +
                 "(%d, %s, %s, %s, %s, %s, %s)";
-        String groups = "{";
-        for(int i = 0; i < this.groups.size() - 1; i++)
-            groups += this.groups.get(i) + ',';
-        groups += this.groups.get(this.groups.size()-1) + "}";
-        query = String.format(query, id,name,password,email,phone, department, groups);
+        String items = "{";
+        for(int i = 0; i < this.items.size() - 1; i++)
+            items += this.items.get(i) + ',';
+        items += this.items.get(this.items.size()-1) + "}";
+        query = String.format(query, id,name,password,email,phone, department, items);
         System.out.println(query);
         dbConfig.update(query);
     }
@@ -56,12 +56,12 @@ public class Teacher extends User implements ActionWithDB<Teacher>{
     @Override
     public void update() {
         String query = "update set UPDATE public.\"" + this.getClass().getName() +
-                "\"SET id=%d, name=%s, email=%s, phone=%s, password=%s, department=%s, groups=%s " +
+                "\"SET id=%d, name=%s, email=%s, phone=%s, password=%s, department=%s, items=%s " +
                 "WHERE id = %d;";
-        String groups = "{";
-        for(int i = 0; i < this.groups.size() - 1; i++)
-            groups += this.groups.get(i) + ',';
-        query = String.format(query, id,name,email,phone, password, department, groups, id);
+        String items = "{";
+        for(int i = 0; i < this.items.size() - 1; i++)
+            items += this.items.get(i) + ',';
+        query = String.format(query, id,name,email,phone, password, department, items, id);
         dbConfig.update(query);
     }
 
@@ -82,9 +82,19 @@ public class Teacher extends User implements ActionWithDB<Teacher>{
             String email = (String) resultList.get(i).get("email");
             String phone = (String) resultList.get(i).get("phone");
             String department = (String) resultList.get(i).get("department");
-            ArrayList<Integer> groups = (ArrayList<Integer>) resultList.get(i).get("groups");
-            teachers.add((new Teacher(id, name, password, email, phone, department, groups)));
+            ArrayList<Integer> items = stringToArray((String) resultList.get(i).get("items"));
+            teachers.add((new Teacher(id, name, password, email, phone, department, items)));
         }
         return teachers;
+    }
+
+    private ArrayList<Integer> stringToArray(String list){
+        list = list.replace("{}", "");
+        ArrayList<Integer> arrayList = new ArrayList<Integer>();
+        String[] arrey = list.split(",");
+        for(int i = 0; i < arrey.length; i++){
+            arrayList.add(Integer.parseInt(arrey[i]));
+        }
+        return arrayList;
     }
 }

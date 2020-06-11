@@ -108,8 +108,8 @@ public class Practical extends Items implements ActionWithDB<Practical>{
             Integer id = (Integer) resultList.get(i).get("id");
             String name = (String) resultList.get(i).get("name");
             Integer teacher = (Integer) resultList.get(i).get("teacher_id");
-            ArrayList<Integer> ratings = (ArrayList<Integer>) resultList.get(i).get("ratings");
-            ArrayList<Integer> visits = (ArrayList<Integer>) resultList.get(i).get("visits");
+            ArrayList<Integer> ratings = stringToArray((String) resultList.get(i).get("ratings"));
+            ArrayList<Integer> visits = stringToArray((String) resultList.get(i).get("visits"));
             practicals.add((new Practical(id,name, teacher, ratings,visits)));
         }
         return practicals;
