@@ -1,4 +1,4 @@
-package ru.electonic_journal;
+package ru.electronic_journal;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.aryhlinskaya.Diplom.config.DBConfig;

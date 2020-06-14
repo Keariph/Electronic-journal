@@ -1,9 +1,9 @@
-package ru.electonic_journal.config;
+package ru.electronic_journal.config;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.electonic_journal.Student;
+import ru.electronic_journal.Student;
 
 import java.util.List;
 

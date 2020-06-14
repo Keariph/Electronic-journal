@@ -1,4 +1,4 @@
-package ru.aryhlinskaya.Diplom;
+package ru.electronic_journal;
 
 import org.springframework.boot.test.context.SpringBootTest;
 

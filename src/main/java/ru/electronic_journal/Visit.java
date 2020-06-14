@@ -1,4 +1,4 @@
-package ru.electonic_journal;
+package ru.electronic_journal;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.aryhlinskaya.Diplom.config.DBConfig;
@@ -8,20 +8,20 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-public class Rating implements ActionWithDB<Rating>{
+public class Visit implements ActionWithDB<Visit>{
     Integer id;
     Integer student;
-    Integer rating;
+    Boolean visit;
     Date date;
     @Autowired
     DBConfig dbConfig;
-    public Rating() {
+    public Visit() {
     }
 
-    public Rating(Integer id, Integer student, Integer rating, Date date) {
+    public Visit(Integer id, Integer student, Boolean visit, Date date) {
         this.id = id;
         this.student = student;
-        this.rating = rating;
+        this.visit = visit;
         this.date = date;
     }
 
@@ -41,12 +41,12 @@ public class Rating implements ActionWithDB<Rating>{
         this.student = student;
     }
 
-    public Integer getRating() {
-        return rating;
+    public Boolean getVisit() {
+        return visit;
     }
 
-    public void setRating(Integer rating) {
-        this.rating = rating;
+    public void setVisit(Boolean visit) {
+        this.visit = visit;
     }
 
     public Date getDate() {
@@ -59,14 +59,14 @@ public class Rating implements ActionWithDB<Rating>{
 
     public String toString(){
         return "{\"id\":" + getId() +", \"student\":" + getStudent() +
-                ", \"rating\":" + getRating() + ", \"date\":\'" + getDate() + "\'}";
+                ", \"visit\":" + getVisit() + ", \"date\":\'" + getDate() + "\'}";
     }
 
     @Override
     public void create() {
         String query = "insert into public.\"" + this.getClass().getName() +
-                "\" (id, student, rating, date) " + "(%d, %s, %d, %s)";
-        query = String.format(query, id, student, rating, date);
+                "\" (id, student, visit, date) " + "(%d, %s, %d, %s)";
+        query = String.format(query, id, student, visit, date);
         System.out.println(query);
         dbConfig.update(query);
     }
@@ -74,9 +74,9 @@ public class Rating implements ActionWithDB<Rating>{
     @Override
     public void update() {
         String query = "update set UPDATE public.\"" + this.getClass().getName() +
-                "\"SET id=%d, student_id=%d, rating=%d, date=%s" +
+                "\"SET id=%d, student_id=%d, visit=%d, date=%s" +
                 "WHERE id = %d;";
-        query = String.format(query, id, student, rating, date, id);
+        query = String.format(query, id, student, visit, date, id);
         dbConfig.update(query);
     }
 
@@ -87,16 +87,16 @@ public class Rating implements ActionWithDB<Rating>{
     }
 
     @Override
-    public List<Rating> read(String query) {
-        ArrayList<Rating> ratings = new ArrayList<Rating>();
+    public List<Visit> read(String query) {
+        ArrayList<Visit> visits = new ArrayList<Visit>();
         List<Map<String, Object>> resultList = dbConfig.query(query);
         for(Integer i=0;i<resultList.size();i++){
             Integer id = (Integer) resultList.get(i).get("id");
             Integer student = (Integer) resultList.get(i).get("student_id");
-            Integer rating = (Integer) resultList.get(i).get("visit");
+            Boolean visit = (Boolean) resultList.get(i).get("visit");
             Date date = (Date) resultList.get(i).get("date");
-            ratings.add((new Rating(id, student, rating, date)));
+            visits.add((new Visit(id, student, visit, date)));
         }
-        return ratings;
+        return visits;
     }
 }

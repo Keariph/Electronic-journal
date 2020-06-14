@@ -1,4 +1,4 @@
-package ru.electonic_journal;
+package ru.electronic_journal;
 
 import ru.aryhlinskaya.Diplom.config.DBConfig;
 

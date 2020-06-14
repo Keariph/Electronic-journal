@@ -1,4 +1,4 @@
-package ru.electonic_journal.config;
+package ru.electronic_journal.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
