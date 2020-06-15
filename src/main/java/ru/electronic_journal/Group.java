@@ -1,7 +1,7 @@
 package ru.electronic_journal;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import ru.aryhlinskaya.Diplom.config.DBConfig;
+import ru.electronic_journal.config.DBConfig;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +12,6 @@ public class Group implements ActionWithDB<Group>{
     String name;
     ArrayList<Integer> students;
     ArrayList<Integer> items;
-    @Autowired
     DBConfig dbConfig;
     public Group(){
 

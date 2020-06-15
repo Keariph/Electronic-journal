@@ -7,9 +7,9 @@ import java.util.*;
 @Component
 public class DBConfig {
     Connection connection;
-    String url = "jdbc:postgresql://localhost:5432/Diplom";
+    String url = "jdbc:postgresql://localhost:5432/Electronic_journal";
     String login = "postgres";
-    String password = "qwert";
+    String password = "admin";
     public DBConfig(){
         try {
             Class.forName("org.postgresql.Driver");

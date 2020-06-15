@@ -1,7 +1,6 @@
 package ru.electronic_journal;
 
 import org.springframework.stereotype.Component;
-import ru.aryhlinskaya.Diplom.config.DBConfig;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -46,7 +45,7 @@ public class Student extends User implements ActionWithDB<Student>{
     public void create() {
         String query = "insert into public.\"" + Student.class.getName() +
                 "\" (id, name, password, email, phone, course, faculty) " +
-                "(%d, \"%s\", \"%s\", \"%s\", \"%s\", %d, \"%s\")";
+                "(%d, \'%s\', \'%s\', \'%s\', \'%s\', %d, \'%s\')";
         query = String.format(query, id,name,password,email,phone, course, faculty);
         System.out.println(query);
         dbConfig.update(query);
@@ -55,7 +54,7 @@ public class Student extends User implements ActionWithDB<Student>{
     @Override
     public void update() {
         String query = "update set UPDATE public.\"" + this.getClass().getName() +
-                "\"SET id=%d, name=%s, email=%s, phone=%s, password=%s, course=%d, faculty=%s " +
+                "\"SET id=%d, name=\'%s\', email=\'%s\', phone=\'%s\', password=\'%s\', course=\'%d\', faculty=\'%s\' " +
                 "WHERE id = %d;";
         query = String.format(query, id,name,email,phone, password, course, faculty, id);
         dbConfig.update(query);

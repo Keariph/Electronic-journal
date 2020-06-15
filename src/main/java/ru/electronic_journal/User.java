@@ -1,7 +1,6 @@
 package ru.electronic_journal;
 
-import ru.aryhlinskaya.Diplom.config.DBConfig;
-
+import ru.electronic_journal.config.DBConfig;
 
 
 public class User {

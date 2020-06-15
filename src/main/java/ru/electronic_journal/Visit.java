@@ -1,7 +1,7 @@
 package ru.electronic_journal;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import ru.aryhlinskaya.Diplom.config.DBConfig;
+import ru.electronic_journal.config.DBConfig;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -13,7 +13,6 @@ public class Visit implements ActionWithDB<Visit>{
     Integer student;
     Boolean visit;
     Date date;
-    @Autowired
     DBConfig dbConfig;
     public Visit() {
     }

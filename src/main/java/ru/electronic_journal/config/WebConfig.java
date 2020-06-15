@@ -16,9 +16,10 @@ public class WebConfig {
     }
 
     @GetMapping(value = "/student", produces = "application/json")
-    public String getStudent(Student student){
-        String query = "select * from public.\"Student\" where email = $s and password = %s";
-        query = String.format(query, student.getEmail(), student.getPassword());
+    public String getStudent(){
+        String query = "select * from public.\"Student\" ";//where email = $s and password = %s";
+        //query = String.format(query, student.getEmail(), student.getPassword());
+        Student student = new Student();
         List<Student> students = student.read(query);
         String str = "";
         if (students.size() > 0) {
@@ -28,6 +29,6 @@ public class WebConfig {
             str += students.get(students.size() - 1);
             return "{\"student\": [ " + str + "]}";
         }
-        return "{\"student\";[]}";
+        return "{\"student\":[]}";
     }
 }
