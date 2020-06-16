@@ -3,6 +3,7 @@ import Drawer from "@material-ui/core/Drawer";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import useStyles from "./styles";
+import {GetItems} from "../Web";
 
 export default function Navigation({
   /**
@@ -16,7 +17,13 @@ export default function Navigation({
   onClose,
 }) {
   const classes = useStyles();
-  const items = ["География", "Математика", "Русский Язык"];
+  const [items, setItems] = React.useState([]);
+  React.useEffect(() => {
+    GetItems().then((result) => {
+      setItems(result.items);
+      console.log(result);
+    })
+  }, []);
   return (
     <Drawer
       anchor="left"

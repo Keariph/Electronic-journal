@@ -4,6 +4,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
+import {GetStudent} from "../Web";
 
 export default function Header({
   /**
@@ -11,6 +12,14 @@ export default function Header({
    */
   onMenuClick,
 }) {
+  const [student, setStudent] = React.useState({});
+
+  React.useEffect(() => {
+    GetStudent().then((result) => {
+      setStudent(result.student[0]);
+    })
+  }, []);
+
   return (
     <AppBar position="sticky">
       <Toolbar>
@@ -23,7 +32,7 @@ export default function Header({
           <MenuIcon />
         </IconButton>
         <Typography variant="h6" noWrap>
-          Электронный журнал
+          {student.name}
         </Typography>
       </Toolbar>
     </AppBar>
