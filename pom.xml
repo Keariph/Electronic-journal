@@ -74,7 +74,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>Diplom</finalName>
+		<finalName>Electronic_journal</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

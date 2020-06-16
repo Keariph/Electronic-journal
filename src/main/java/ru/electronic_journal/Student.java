@@ -9,14 +9,16 @@ import java.util.Map;
 public class Student extends User implements ActionWithDB<Student>{
     Integer course;
     String faculty;
+    String group;
 
     public Student() {
     }
 
-    public Student(Integer id, String name, String password, String email, String phone, Integer course, String faculty) {
+    public Student(Integer id, String name, String password, String email, String phone, Integer course, String faculty, String group) {
         super(id, name, password, email, phone);
         this.course = course;
         this.faculty = faculty;
+        this.group = group;
     }
 
     public Integer getCourse() {
@@ -35,18 +37,26 @@ public class Student extends User implements ActionWithDB<Student>{
         this.faculty = faculty;
     }
 
+    public String getGroup() {
+        return group;
+    }
+
+    public void setGroup(String group) {
+        this.group = group;
+    }
+
     public String toString(){
         return "{\"id\": " + getId() + " ,\"name\":\"" + getName() + "\" ,\"password\":\"" + getPassword() +
                 "\",\"email\":\"" + getEmail() + "\" ,\"phone\":\"" + getPhone() + "\" ,\"course\": " + getCourse() +
-                "\",\"faculty\":\"" + getFaculty() +"\"}";
+                ",\"faculty\":\"" + getFaculty() + "\", \"group\": \"" + getGroup() + "\"}";
     }
 
     @Override
     public void create() {
         String query = "insert into public.\"" + Student.class.getName() +
-                "\" (id, name, password, email, phone, course, faculty) " +
-                "(%d, \'%s\', \'%s\', \'%s\', \'%s\', %d, \'%s\')";
-        query = String.format(query, id,name,password,email,phone, course, faculty);
+                "\" (id, name, password, email, phone, course, faculty, group) " +
+                "(%d, \'%s\', \'%s\', \'%s\', \'%s\', %d, \'%s\', \'%s\')";
+        query = String.format(query, id,name,password,email,phone, course, faculty, group);
         System.out.println(query);
         dbConfig.update(query);
     }
@@ -54,9 +64,9 @@ public class Student extends User implements ActionWithDB<Student>{
     @Override
     public void update() {
         String query = "update set UPDATE public.\"" + this.getClass().getName() +
-                "\"SET id=%d, name=\'%s\', email=\'%s\', phone=\'%s\', password=\'%s\', course=\'%d\', faculty=\'%s\' " +
+                "\"SET id=%d, name=\'%s\', email=\'%s\', phone=\'%s\', password=\'%s\', course=\'%d\', faculty=\'%s\', group=\'%s\' " +
                 "WHERE id = %d;";
-        query = String.format(query, id,name,email,phone, password, course, faculty, id);
+        query = String.format(query, id,name,email,phone, password, course, faculty, group, id);
         dbConfig.update(query);
     }
 
@@ -78,7 +88,8 @@ public class Student extends User implements ActionWithDB<Student>{
             String phone = (String) resultList.get(i).get("phone");
             Integer course = (Integer) resultList.get(i).get("course");
             String faculty = (String) resultList.get(i).get("faculty");
-            students.add((new Student(id, name, password, email, phone, course, faculty)));
+            String group = (String) resultList.get(i).get("group");
+            students.add((new Student(id, name, password, email, phone, course, faculty, group)));
         }
         return students;
     }
